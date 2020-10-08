@@ -1,5 +1,5 @@
 class Paper{
-    constructor(){
+    constructor(x,y,r){
         var optionP = {
             restitution:0.3,
             friction:0.5,
@@ -7,15 +7,19 @@ class Paper{
             isStatic:false,
         }
 
-        this.paper=Bodies.circle(200,200,25,optionP);
-        World.add(world, this.paper);
+        this.body=Bodies.circle(x,y,r,optionP);
+
+this.radius=r;
+
+        World.add(world, this.body)
+
     }
     display(){
         push();
-        translate(this.paper.position.x,this.paper.position.y);
-        rotate(this.paper.angle);
+        translate(this.body.position.x,this.body.position.y);
+//        rotate(this.body.angle);
         ellipseMode(RADIUS);
-        ellipse(200, 200, 25, 25)
+        ellipse(0, 0, this.radius, this.radius)
         pop();
     }
 }

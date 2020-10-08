@@ -1,4 +1,4 @@
-var paper, ground, box;
+var paper, ground, paper_img, box_img, box;
 
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -11,7 +11,7 @@ function preload()
 }
 
 function setup() {
-	createCanvas(1325, 650);
+	createCanvas(1200, 600);
 
 
 	engine = Engine.create();
@@ -19,8 +19,8 @@ function setup() {
 
 	//Create the Bodies Here.
 
-	paper = new Paper();
-	ground = new Ground();
+	paper = new Paper(200,200,25);
+	ground = new Ground(width/2,580,width,30);
     box=new Dust_bin();
 
 	Engine.run(engine);
@@ -31,21 +31,16 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0);
-  Engine.update(engine);
+
 box.display();
 ground.display();
 paper.display();
-jump();
-  drawSprites();
- 
+
 }
 
-function jump(){
+function keyPressed(){
 	if(keyCode===UP_ARROW){
-		Matter.Body.applyForce(
-			paper.body,
-			 paper.position,
-			  {x:85,y:85});
+		Matter.Body.applyForce(paper.body,paper.body.position,{x:100,y:-90});
 	}
 }
 
